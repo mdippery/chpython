@@ -3,6 +3,14 @@ PYTHONS=()
 
 [ -d "${HOME}/.pythons" ] && PYTHONS+=("${HOME}/.pythons"/*)
 
+function _chpython_exec {
+  local python
+  python=$1
+  shift
+  echo $python
+  env PATH="$python/bin:$PATH" $*
+}
+
 function _chpython_reset {
   [ -z "$CHPYTHON_ROOT" ] && return
   PATH=":$PATH:"
@@ -60,7 +68,16 @@ EOS
       echo "chpython $CHPYTHON_VERSION"
       ;;
     exec)
-      echo "Exec'ing with Python version: $1"
+      shift
+      local match
+      match=$(_chpython_select $1)
+      if [ -z "$match" ]; then
+        echo "chpython: unknown Python: $1" >&2
+        return 1
+      fi
+
+      shift
+      _chpython_exec $match $*
       ;;
     system)
       _chpython_reset
