@@ -12,10 +12,17 @@ function chpython_reset {
 function chpython {
   case "$1" in
     -h|--help)
-      echo 'usage: chpython [PYTHON|VERSION|system]'
+      cat <<EOS
+Usage:
+  chpython [PYTHON|VERSION|system]
+  chpython exec [PYTHON|VERSION] args...
+EOS
       ;;
     -V|--version)
       echo "chpython $CHPYTHON_VERSION"
+      ;;
+    exec)
+      echo "Exec'ing with Python version: $1"
       ;;
     system)
       chpython_reset
