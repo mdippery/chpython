@@ -13,6 +13,25 @@ function _chpython_reset {
   type python || type python3
 }
 
+function _chpython_select {
+  local dir python match
+  for dir in ${PYTHONS[@]}; do
+    dir=${dir%%/}
+    python=${dir##*/}
+    case "$python" in
+      "$1")
+        # Match using 3-part version number, e.g. `chruby 2.7.10`
+        match=$dir && break
+        ;;
+      *"$1"*)
+        # Match best using 2-part version number, e.g., `chpython 2.7`
+        match=$dir
+        ;;
+    esac
+  done
+  echo "$match"
+}
+
 function _chpython_use {
   if [[ ! -x "$1/bin/python" && ! -x "$1/bin/python3" ]]; then
     echo "chpython: neither $1/bin/python nor $1/bin/python3 are executable" >&2
@@ -47,22 +66,8 @@ EOS
       _chpython_reset
       ;;
     *)
-      local dir python match
-      for dir in ${PYTHONS[@]}; do
-        dir=${dir%%/}
-        python=${dir##*/}
-        case "$python" in
-          "$1")
-            # Match using 3-part version number, e.g. `chruby 2.7.10`
-            match=$dir && break
-            ;;
-          *"$1"*)
-            # Match best using 2-part version number, e.g., `chpython 2.7`
-            match=$dir
-            ;;
-        esac
-      done
-
+      local match
+      match=$(_chpython_select $1)
       if [ -z "$match" ]; then
         echo "chpython: unknown Python: $1" >&2
         return 1
