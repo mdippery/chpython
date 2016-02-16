@@ -2,8 +2,22 @@
 
 Changes the current Python.
 
-It's useful when you have multiple Python installations that you want to
-seamlessly switch between.
+## What is it?
+
+It's a way to seamlessly switch between multiple Python installations. It's
+mostly designed for setting a "default" Python interpreter for running scripts
+or providing an interactive shell, rather than setting a Python interpreter
+for a specific project (virtualenv and friends is a better tool for
+per-project Python installations).
+
+## What is it not?
+
+**chpython** is not a tool to:
+
+* Replace virtualenv. **chpython** is not designed to switch between Pythons
+  on a per-project basis.
+* Install Python. I do not plan to add support for downloading and compiling
+  Python to **chpython**. It is expressly for _managing_ installations.
 
 ## What does it do?
 
@@ -62,7 +76,10 @@ specify a full version: `chpython 2.7.10`.
    by default, but you can use a different Python on a per-shell basis by
    calling `chpython VERSION` manually.
 
-## Why not virtualenv?
+
+## Why not use...
+
+### ...virtualenv?
 
 Virtualenv is a great solution for setting up a specific Python version to use
 on a per-project basis, but I have never liked using it to set a default
@@ -76,6 +93,12 @@ shell to a "new" Python is as simple as adding its `bin` directory to your
 I compile versions of Python to use by default in my shell to `~/.pythons`. I
 wanted a quick way to switch between different versions, and was inspired by
 [chruby] to write a bash script to handle that switching seamlessly for me.
+
+### ...Conda (Anaconda, Miniconda)?
+
+Conda and its various incarnations could be used for a similar purpose, but
+personally I find them to be far too heavyweight for the relatively simple
+tasking of providing and managing default Python installations.
 
   [chruby]: https://github.com/postmodern/chruby
   [pyenv]:  https://github.com/yyuu/pyenv
