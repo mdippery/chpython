@@ -7,7 +7,6 @@ function _chpython_exec {
   local python
   python=$1
   shift
-  echo $python
   env PATH="$python/bin:$PATH" $*
 }
 
