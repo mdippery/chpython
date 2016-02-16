@@ -30,7 +30,7 @@ updating `$PATH` or any other environment variables, by calling:
 For example, you can call `python -V` on an ancient version of Python you have
 installed for some reason:
 
-    $ chpython 2.5 python -V
+    $ chpython exec 2.5 python -V
 
 **chpython** supports fuzzy matching of Python versions, so `chpython 2.7`
 will execute the latest version of Python 2.7 it can find. You can also
