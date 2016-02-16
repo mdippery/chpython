@@ -81,6 +81,13 @@ EOS
     system)
       _chpython_reset
       ;;
+    '')
+      local python
+      for dir in ${PYTHONS[@]}; do
+        python=${dir##*/}
+        echo $python
+      done
+      ;;
     *)
       local match
       match=$(_chpython_select $1)
