@@ -33,7 +33,7 @@ installed for some reason:
     $ chpython 2.5 python -V
 
 **chpython** supports fuzzy matching of Python versions, so `chpython 2.7`
-will execute the latest version of Python 2.5 it can find. You can also
+will execute the latest version of Python 2.7 it can find. You can also
 specify a full version: `chpython 2.7.10`.
 
 ## What does it not do?
