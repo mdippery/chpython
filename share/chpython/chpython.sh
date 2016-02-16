@@ -7,6 +7,9 @@ function _chpython_exec {
   local python
   python=$1
   shift
+  # TODO: Clear path so invoking `chpython 3.5 python -V` when
+  # $CHPYTHON_VERSION is set to a 2.x Python gives a command not
+  # found error instead of running $CHPYTHON_VERSION/bin/python.
   env PATH="$python/bin:$PATH" $*
 }
 
