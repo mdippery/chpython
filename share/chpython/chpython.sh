@@ -85,10 +85,15 @@ EOS
       _chpython_reset
       ;;
     '')
-      local python
+      local dir python
       for dir in ${PYTHONS[@]}; do
+        dir="${dir%%/}"
         python=${dir##*/}
-        echo $python
+        if [[ "$dir" == "$CHPYTHON_ROOT" ]]; then
+          echo " * ${python}"
+        else
+          echo "   ${python}"
+        fi
       done
       ;;
     *)
