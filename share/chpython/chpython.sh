@@ -33,7 +33,7 @@ function _chpython_select {
         # Match using 3-part version number, e.g. `chruby 2.7.10`
         match=$dir && break
         ;;
-      *"$1"*)
+      "$1"*)
         # Match best using 2-part version number, e.g., `chpython 2.7`
         match=$dir
         ;;
