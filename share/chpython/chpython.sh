@@ -1,7 +1,11 @@
 CHPYTHON_VERSION='0.1.0.dev'
 PYTHONS=()
 
-[ -d "${HOME}/.pythons" ] && PYTHONS+=("${HOME}/.pythons"/*)
+for dir in "/opt/pythons" "$HOME/.pythons"; do
+  [ -d "$dir" ] && PYTHONS+=("$dir"/*)
+done
+
+unset dir
 
 function _chpython_exec {
   local python
