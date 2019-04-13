@@ -44,7 +44,7 @@ function _chpython_select {
 }
 
 function _chpython_use {
-  if [[ ! -x "$1/bin/python" && ! -x "$1/bin/python3" ]]; then
+  if ! [[ -x "$1/bin/python" || -x "$1/bin/python3" ]]; then
     echo "chpython: neither $1/bin/python nor $1/bin/python3 are executable" >&2
     return 1
   fi
