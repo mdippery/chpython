@@ -6,7 +6,7 @@ function chpython_auto() {
 	until [[ -z "$dir" ]]; do
 		dir="${dir%/*}"
 
-		if { read -r version <"$dir/.python-version"; } 2>/dev/null || [[ -n "$version" ]]; then
+		if { read -r version < "$dir/.python-version"; } 2>/dev/null || [[ -n "$version" ]]; then
 			version="${version%%[[:space:]]}"
 
 			if [[ "$version" == "$PYTHON_AUTO_VERSION" ]]; then return
